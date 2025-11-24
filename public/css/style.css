@@ -1,0 +1,104 @@
+.header {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.header .inner-logo img {
+    max-height: 50px;
+    max-width: 100%;
+}
+
+.header .inner-menu > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.header .inner-menu > ul > li {
+    margin-left: 20px;
+}
+
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+}
+
+/* BỔ SUNG VÀO style.css */
+
+/* product-item */
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease; 
+}
+
+.product-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-5px); 
+}
+
+.product-item .inner-image {
+    width: 100%;
+    padding-top: 100%; 
+    position: relative;
+    overflow: hidden; 
+}
+
+.product-item .inner-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; 
+}
+
+.product-item .inner-content {
+    padding: 15px;
+    text-align: center; 
+}
+
+.product-item .inner-content h3.inner-title {
+    font-size: 18px; 
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-item .inner-price-old {
+    color: #888; 
+    text-decoration: line-through; 
+    margin-right: 10px; 
+    font-size: 14px;
+    display: inline-block;
+}
+
+.product-item .inner-price-new {
+    /* Đảm bảo giá mới nổi bật */
+    color: #000; 
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px; 
+    display: inline-block;
+}
+
+.product-item .inner-discount {
+    /* Tạo hình dạng chiết khấu -20% */
+    background-color: #dc3545; /* Màu đỏ */
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block; /* Quan trọng để nằm cùng hàng với giá */
+}
