@@ -1,5 +1,8 @@
 const express = require('express');
 const router = require("./router/client/index.router.js")
+const routerAdmin = require("./router/admin/index.router.js")
+const systemConfig = require('./config/system.js');
+
 require('dotenv').config();
 
 const database = require('./config/database.js');
@@ -13,8 +16,12 @@ app.set('views', './views');
 app.set('view engine' , 'pug');
 app.use(express.static('public'));
 
+// App local variables
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
+
 //Routers
 router(app);
+routerAdmin(app);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)

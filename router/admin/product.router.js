@@ -1,8 +1,7 @@
-// GET /home
 const express = require("express");
 const router = express.Router();
 
-const controller = require("../../controller/client/home.controller");
+const controller = require("../../controller/admin/product.controller");
 
 router.get("/", controller.index);
 
