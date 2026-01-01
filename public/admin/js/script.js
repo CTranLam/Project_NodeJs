@@ -6,6 +6,7 @@ if(buttonStatus.length > 0){
     buttonStatus.forEach(button =>{
         button.addEventListener("click",()=>{
             if(status){
+                // phần sau dấu ? là searchParams
                 url.searchParams.set("status", status);
             }
             else{
@@ -24,7 +25,7 @@ if (formSearch) {
     let url = new URL(window.location.href);
 
     formSearch.addEventListener("submit", (e) => {
-        e.preventDefault(); 
+        e.preventDefault(); // ngăn load lại trang làm xóa hết các tham số trên url 
         const keyword = e.target.elements.keyword.value;
 
         if (keyword) {

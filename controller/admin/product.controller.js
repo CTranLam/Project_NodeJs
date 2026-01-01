@@ -14,12 +14,20 @@ module.exports.index= async(req, res)=>{
         // thêm field vào object 
         find.status = req.query.status;
     }
+    let keyword = "";
+    if(req.query.keyword){
+        keyword = req.query.keyword;
+
+        const regex = new RegExp(keyword, 'i'); // 'i' không phân biệt hoa thường
+        find.title = regex;
+    }
 
     const products = await Product.find(find)
     res.render("admin/pages/products/index", {
         pageTitle : "Danh sách sản phẩm",
         products: products,
         filterStatus : filterStatus,
-        currentStatus : currentStatus
+        currentStatus : currentStatus,
+        keyword: keyword
     });
 };
