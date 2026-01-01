@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../mixins/filterStatus.pug
 
 block main
     h1 Danh sách sản phẩm
@@ -7,13 +8,8 @@ block main
         .card-body
             .row
                 .col-6
-                    each item in filterStatus
-                        //- item nào có status trùng với currentStatus truyền từ controller thì thêm class active vào
-                        button.btn.btn-sm.ml-1.btn-outline-success(
-                            button-status=item.status
-                            class={ active: item.status === currentStatus } 
-                        )
-                            a(href=`?status=${item.status}`) #{item.name}
+                    //- Gọi mixin filter-status và truyền vào 2 tham số filterStatus và currentStatus
+                    +filter-status(filterStatus, currentStatus) 
                 .col-6
                     form(id="form-search")
                         .input-group

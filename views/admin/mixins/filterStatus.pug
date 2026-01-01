@@ -1,0 +1,8 @@
+mixin filter-status(filterStatus, currentStatus)
+    each item in filterStatus
+        //- item nào có status trùng với currentStatus truyền từ controller thì thêm class active vào
+        button.btn.btn-sm.ml-1.btn-outline-success(
+            button-status=item.status
+            class={ active: item.status === currentStatus } 
+        )
+            a(href=`?status=${item.status}`) #{item.name}

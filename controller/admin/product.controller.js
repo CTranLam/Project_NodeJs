@@ -1,12 +1,10 @@
 const Product = require("../../models/product.model.js");
+const filterStatusHelper = require("../helpers/filterStatus.js");
 // GET /admin/products
 module.exports.index= async(req, res)=>{
-    const currentStatus = req.query.status || "";
-    const filterStatus = [
-        { name: "Tất cả", status: "" },
-        { name: "Hoạt động", status: "active" },
-        { name: "Dừng hoạt động", status: "inactive" }
-    ];
+    // Bộ lọc trạng thái
+    const { currentStatus, filterStatus } = filterStatusHelper(req.query);
+
     let find = {
         deleted: false
     }
