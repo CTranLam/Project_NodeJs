@@ -37,13 +37,31 @@ block main
                                 img(src=item.thumbnail, alt= item.title, width="100px", height="auto")
                             td #{item.title}
                             td #{item.price}
-                            td 
+                            td  
+                                //- href ="javascript:;" để không chuyển trang khi click
+                                //- href = "#" nó sẽ chuyển trang lên đầu
                                 if item.status == 'active'
-                                    a.badge.bg-success(href="#") Hoạt động
+                                    a.badge.bg-success(href="javascript:;",
+                                    button-change-status,
+                                    data-status=item.status,
+                                    data-id=item._id) Hoạt động
                                 else
-                                    a.badge.bg-danger(href="#") Dừng hoạt động
+                                    a.badge.bg-danger(href="javascript:;",
+                                    button-change-status,
+                                    data-status=item.status,
+                                    data-id=item._id) Dừng hoạt động
                             td
                                 button.btn.btn-warning.btn-sm.me-1 Sửa
                                 button.btn.btn-danger.btn-sm Xóa
     //- Phân trang
     +pagination(pagination)
+
+    //- Gửi qua form hoặc gửi qua API
+    form(
+        action="",
+        method="POST"
+        id = "form-change-status"
+        data-path=`${prefixAdmin}/products/change-status`
+    )
+
+    script(src="/admin/js/product.js")

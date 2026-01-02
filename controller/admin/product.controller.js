@@ -23,7 +23,7 @@ module.exports.index= async(req, res)=>{
     //Pagination
     countProducts = await Product.countDocuments(find);
     let objectPagination = paginationHelper(req.query, {
-        currentPage: 2,
+        currentPage: 1,
         limitItems: 4
     }, countProducts);
 
@@ -39,4 +39,15 @@ module.exports.index= async(req, res)=>{
         keyword: keyword,
         pagination: objectPagination
     });
+};
+
+// GET /admin/products/change-status/:status/:id
+module.exports.changeStatus= async(req, res)=>{
+    // console.log(req.params); lấy biến sau : khác req.query là sau ?
+    const status = req.params.status;
+    const id = req.params.id;
+
+    // cập nhật product id nào với status nào
+    await Product.updateOne({_id: id}, {status: status});
+    res.redirect("/admin/products");
 };

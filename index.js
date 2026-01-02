@@ -1,4 +1,5 @@
 const express = require('express');
+const methodOverride = require('method-override');
 const router = require("./router/client/index.router.js")
 const routerAdmin = require("./router/admin/index.router.js")
 const systemConfig = require('./config/system.js');
@@ -11,6 +12,8 @@ database.connect();
 const app = express();
 const port = process.env.PORT;
 
+// phải ghi sau app
+app.use(methodOverride('_method'));
 
 app.set('views', './views'); 
 app.set('view engine' , 'pug');
