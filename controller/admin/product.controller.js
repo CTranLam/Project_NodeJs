@@ -18,13 +18,31 @@ module.exports.index= async(req, res)=>{
     if(objectSearch.regex){
         find.title = objectSearch.regex; // thêm field vào object 
     }
-    const products = await Product.find(find)
-    
+
+    //Pagination
+    let objectPagination = {
+        currentPage: 2,
+        limitItems: 4
+
+    };
+    if(req.query.page){
+        objectPagination.currentPage = parseInt(req.query.page);
+    }
+    objectPagination.skipItems = (objectPagination.currentPage - 1) * objectPagination.limitItems;
+
+    countProducts = Product.countDocuments(find);
+    // truy vấn vào trong DB là phải dùng await
+    objectPagination.totalPage = Math.ceil((await countProducts) / objectPagination.limitItems);
+
+    // end Pagination
+    const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skipItems);
+
     res.render("admin/pages/products/index", {
         pageTitle : "Danh sách sản phẩm",
         products: products,
         filterStatus : filterStatus,
         currentStatus : currentStatus,
-        keyword: keyword
+        keyword: keyword,
+        pagination: objectPagination
     });
 };
