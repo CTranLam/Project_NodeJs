@@ -1,5 +1,8 @@
 const express = require('express');
 const methodOverride = require('method-override');
+const flash = require("express-flash");
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const router = require("./router/client/index.router.js")
 const routerAdmin = require("./router/admin/index.router.js")
@@ -16,6 +19,12 @@ const port = process.env.PORT;
 // phải ghi sau app
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Flash
+app.use(cookieParser('secret'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
+// End Flash
 
 app.set('views', './views'); 
 app.set('view engine' , 'pug');

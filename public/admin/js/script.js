@@ -130,3 +130,13 @@ if(formChangeMulti){
     });
 }
 // End Form change multi
+
+// Show alert
+const showAlert = document.querySelector("[show-alert]");
+if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time")) 
+    setTimeout(()=>{
+        showAlert.style.display = "none";
+    }, time);
+}
+// End show alert
