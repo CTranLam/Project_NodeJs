@@ -38,7 +38,7 @@ if(buttonsDelete.length > 0){
                 const action = path + `/${id}?_method=DELETE`;
                 formDeleteItem.action = action;
 
-                // submit form xóa đó lên param
+                // submit form xóa, gửi action lên server
                 formDeleteItem.submit();
             }
         });
