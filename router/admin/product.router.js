@@ -10,4 +10,6 @@ router.patch("/change-multi", controller.changeMulti);
 
 router.delete("/delete/:id", controller.deleteItem);
 
+router.get("/create", controller.create); // Lấy ra trang tạo sản phẩm mới
+router.post("/create", controller.createProduct); // Xử lý tạo sản phẩm mới
 module.exports = router;
