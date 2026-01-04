@@ -140,3 +140,19 @@ if(showAlert){
     }, time);
 }
 // End show alert
+
+// Upload image preview
+const uploadImage = document.querySelector("[upload-image-input]");
+if(uploadImage){
+    const uploadImageInput = document.querySelector("[upload-image-input]");
+    const uploadImagePreview = document.querySelector("[upload-image-preview]");
+    uploadImageInput.addEventListener("change", (e)=>{
+        // console.log(e);
+        const file = e.target.files[0]; // Hoặc sử dụng destructuring: const [file] = e.target.files;
+        if(file){
+            uploadImagePreview.src = URL.createObjectURL(file); // thêm thuộc tính src cho thẻ img
+            uploadImagePreview.style.display = "block"; // hiển thị thẻ img
+        }
+    });
+}
+// End Upload image preview

@@ -61,7 +61,9 @@ block main
         min="0"
       )
 
-    div(class="form-group")
+    div(class="form-group"
+      upload-image
+    )
       label(for="thumbnail") Ảnh
       input(
         type="file"
@@ -69,6 +71,14 @@ block main
         id="thumbnail"
         name="thumbnail"
         accept ="image/*"
+        upload-image-input
+      )
+      img(
+        src=""
+        alt="Preview Image"
+        class="img-thumbnail mt-2"
+        style="max-width: 200px; display: none;"
+        upload-image-preview
       )
 
     div(class="form-group")
