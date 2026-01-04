@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const multer = require("multer");
+const storageMulter = require("../../controller/helpers/storageMulter.js");
+const upload = multer({ storage: storageMulter() });
+
 const controller = require("../../controller/admin/product.controller");
 
 router.get("/", controller.index);
@@ -11,5 +15,6 @@ router.patch("/change-multi", controller.changeMulti);
 router.delete("/delete/:id", controller.deleteItem);
 
 router.get("/create", controller.create); // Lấy ra trang tạo sản phẩm mới
-router.post("/create", controller.createProduct); // Xử lý tạo sản phẩm mới
+
+router.post("/create", upload.single("thumbnail"), controller.createProduct); // Xử lý tạo sản phẩm mới
 module.exports = router;

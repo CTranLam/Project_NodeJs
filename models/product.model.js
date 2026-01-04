@@ -19,11 +19,11 @@ const productSchema = new mongoose.Schema(
             default: false
         },
         deletedAt: Date,
-        // Để sinh slug tự động từ title, slug là duy nhất
+        // Để sinh slug tự động từ title, slug là duy nhất nếu trùng sẽ tự thêm số đằng sau
         slug: {
             type: String,
             slug: "title", // San-pham-1
-            unique: true
+            unique: true 
         }
     },
     { 

@@ -4,6 +4,7 @@ const flash = require("express-flash");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 const router = require("./router/client/index.router.js")
 const routerAdmin = require("./router/admin/index.router.js")
 const systemConfig = require('./config/system.js');
