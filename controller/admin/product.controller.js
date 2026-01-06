@@ -106,7 +106,8 @@ module.exports.create= async(req, res)=>{
 
 // POST /admin/products/create
 module.exports.createProduct= async(req, res)=>{
-    console.log(req.file);
+    
+    // console.log(req.file);
     // console.log(req.body); 
     req.body.price = Number(req.body.price);
     req.body.discountPercentage = Number(req.body.discountPercentage);
@@ -119,7 +120,9 @@ module.exports.createProduct= async(req, res)=>{
     else{
         req.body.position = parseInt(req.body.position);
     }
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
+    if(req.file){
+        req.body.thumbnail = `/uploads/${req.file.filename}`;
+    }
 
     const product = new Product(req.body);
     // console.log(product);
