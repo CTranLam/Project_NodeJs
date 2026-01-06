@@ -4,6 +4,6 @@ module.exports.createPost = (req, res, next)=>{
         res.redirect("/admin/products");
         return;
     }
-    // hàm midleware do express viết
+    // hàm middleware do express viết
     next(); // chuyển sang bước kế tiếp
 }

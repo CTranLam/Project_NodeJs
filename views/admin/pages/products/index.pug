@@ -86,7 +86,9 @@ block main
                                         data-status=item.status,
                                         data-id=item._id) Dừng hoạt động
                                 td
-                                    button.btn.btn-warning.btn-sm.me-1 Sửa
+                                    a.btn.btn-warning.btn-sm.me-1(
+                                        href=`${prefixAdmin}/products/edit/${item.id}`
+                                    ) Sửa
                                     button.btn.btn-danger.btn-sm(
                                         data-id=item._id,
                                         button-delete
