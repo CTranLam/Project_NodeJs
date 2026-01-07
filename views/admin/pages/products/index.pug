@@ -85,7 +85,10 @@ block main
                                         button-change-status,
                                         data-status=item.status,
                                         data-id=item._id) Dừng hoạt động
-                                td
+                                td  
+                                    a.btn.btn-secondary.btn-sm.me-1(
+                                        href=`${prefixAdmin}/products/detail/${item.id}`
+                                    ) Chi tiết
                                     a.btn.btn-warning.btn-sm.me-1(
                                         href=`${prefixAdmin}/products/edit/${item.id}`
                                     ) Sửa
