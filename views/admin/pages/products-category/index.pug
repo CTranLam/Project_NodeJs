@@ -1,0 +1,84 @@
+extends ../../layouts/default.pug
+
+block main
+  h1 Danh mục sản phẩm
+
+  .card.mb-3
+    .card-header Danh sách danh mục
+    .card-body
+      .row 
+        .col-8
+          //- Có thể thêm bộ lọc ở đây nếu cần
+        .col-4.text-right
+          a(
+            href=`${prefixAdmin}/products-category/create`
+            class="btn btn-outline-success"
+          ) + Thêm mới
+
+      table(
+        class="table table-hover table-sm"
+        checkbox-multi
+      )
+        thead
+          tr  
+            th 
+              input(type="checkbox" name="checkall" id="checkall")
+            th STT
+            th Hình ảnh
+            th Tiêu đề
+            th Vị trí
+            th Trạng thái
+            th Hành động
+        tbody
+          each item, index in records
+            tr  
+              td 
+                input(
+                  type="checkbox"
+                  name="id"
+                  value=item._id
+                  class="checkbox-item"
+                )
+              td #{index + 1}
+              td
+                img(
+                  src=item.thumbnail
+                  alt=item.title
+                  width="100px"
+                  height="auto"
+                )
+              td #{item.title}
+              td 
+                input(
+                  type="number"
+                  value=item.position
+                  style="width: 60px;"
+                  min="1"
+                  name="position"
+                )
+              td  
+                if item.status == 'active'
+                  a.badge.bg-success(
+                    href="javascript:;"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Hoạt động
+                else
+                  a.badge.bg-danger(
+                    href="javascript:;"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Dừng hoạt động
+              td  
+                a.btn.btn-secondary.btn-sm.me-1(
+                  href=`${prefixAdmin}/products-category/detail/${item.id}`
+                ) Chi tiết
+                a.btn.btn-warning.btn-sm.me-1(
+                  href=`${prefixAdmin}/products-category/edit/${item.id}`
+                ) Sửa
+                button.btn.btn-danger.btn-sm(
+                  data-id=item._id
+                  button-delete
+                ) Xóa

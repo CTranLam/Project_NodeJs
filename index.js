@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const path = require('path')
 const methodOverride = require('method-override');
 const flash = require("express-flash");
 const cookieParser = require('cookie-parser');
@@ -8,7 +9,6 @@ const session = require('express-session');
 const router = require("./router/client/index.router.js")
 const routerAdmin = require("./router/admin/index.router.js")
 const systemConfig = require('./config/system.js');
-
 
 
 const database = require('./config/database.js');
@@ -31,6 +31,13 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine' , 'pug');
 
 app.use(express.static(`${__dirname}/public`));
+
+// Tiny mce 
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "node_modules/tinymce"))
+);
+// End Tiny mce
 
 // App local variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
