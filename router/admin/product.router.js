@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const multer = require("multer");
-const storageMulter = require("../../controller/helpers/storageMulter.js");
-const upload = multer({ storage: storageMulter() });
+const upload = multer({ storage: multer.memoryStorage() });
+
+
 
 const controller = require("../../controller/admin/product.controller");
 const validate = require("../../validate/admin/product.validate");
@@ -16,17 +17,22 @@ router.delete("/delete/:id", controller.deleteItem);
 
 router.get("/create", controller.create); // Lấy ra trang tạo sản phẩm mới
 
+router.get("/edit/:id", controller.edit);
+
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware")
+
 router.post("/create", upload.single("thumbnail"),
+    uploadCloud.uploadCloudinary,
     validate.createPost, // midleware
     controller.createProduct); // Xử lý tạo sản phẩm mới
-module.exports = router;
 
-
-router.get("/edit/:id", controller.edit);
 
 router.patch("/edit/:id",
     upload.single("thumbnail"),
+    uploadCloud.uploadCloudinary,
     validate.createPost,
     controller.editPatch);
 
 router.get("/detail/:id", controller.detail);
+
+module.exports = router;

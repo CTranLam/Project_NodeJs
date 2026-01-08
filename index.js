@@ -1,15 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
 const methodOverride = require('method-override');
 const flash = require("express-flash");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const bodyParser = require('body-parser');
-const multer = require('multer');
 const router = require("./router/client/index.router.js")
 const routerAdmin = require("./router/admin/index.router.js")
 const systemConfig = require('./config/system.js');
 
-require('dotenv').config();
+
 
 const database = require('./config/database.js');
 database.connect();
@@ -19,7 +19,7 @@ const port = process.env.PORT;
 
 // phải ghi sau app
 app.use(methodOverride('_method'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // Flash
 app.use(cookieParser('secret'));

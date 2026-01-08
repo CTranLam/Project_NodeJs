@@ -120,9 +120,9 @@ module.exports.createProduct= async(req, res)=>{
     else{
         req.body.position = parseInt(req.body.position);
     }
-    if(req.file){
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
-    }
+    // if(req.file){
+    //     req.body.thumbnail = `/uploads/${req.file.filename}`;
+    // }
 
     const product = new Product(req.body);
     // console.log(product);
@@ -143,7 +143,7 @@ module.exports.edit= async(req, res)=>{
 
         const product = await Product.findOne(find);
 
-        console.log(product)
+        // console.log(product)
         res.render("admin/pages/products/edit", {
             pageTitle : "Chỉnh sửa sản phẩm",
             product : product
@@ -155,17 +155,16 @@ module.exports.edit= async(req, res)=>{
 
 // PATCH /admin/products/edit/:id
 module.exports.editPatch= async(req, res)=>{
-    // console.log(req.body);
+    console.log(req.body);
     // res.send("OK")
     req.body.price = Number(req.body.price);
     req.body.discountPercentage = Number(req.body.discountPercentage);
     req.body.stock = Number(req.body.stock);
     req.body.position = parseInt(req.body.position);
 
-    if(req.file){
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
-    }
-
+    // if(req.file){
+    //     req.body.thumbnail = `/uploads/${req.file.filename}`;
+    // }
 
     try{
         await Product.updateOne({_id: req.params.id}, req.body);
@@ -187,7 +186,7 @@ module.exports.detail= async(req, res)=>{
 
         const product = await Product.findOne(find);
 
-        console.log(product)
+        // console.log(product)
 
         res.render("admin/pages/products/detail", {
             pageTitle : product.title,
