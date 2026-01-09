@@ -1,7 +1,7 @@
 const Role = require("../../models/role.model");
 const systemConfig = require("../../config/system");
 
-// GET /admin/role
+// GET /admin/roles
 module.exports.index = async(req, res)=>{
     let find = {
         deleted: false
@@ -15,7 +15,7 @@ module.exports.index = async(req, res)=>{
     });
 };
 
-// GET /admin/role/create
+// GET /admin/roles/create
 module.exports.create = async(req, res)=>{
 
     res.render("admin/pages/role/create", {
@@ -23,7 +23,7 @@ module.exports.create = async(req, res)=>{
     });
 };
 
-// POST /admin/role/create
+// POST /admin/roles/create
 module.exports.createPost = async(req, res)=>{
 
     const record = new Role(req.body);
@@ -31,3 +31,39 @@ module.exports.createPost = async(req, res)=>{
 
     res.redirect(`${systemConfig.prefixAdmin}/roles`);
 };
+
+// GET /admin/roles/edit/:id
+module.exports.edit = async(req, res)=>{
+    try{
+        const id = req.params.id;
+        
+        let find = {
+            _id : id,
+            deleted: false
+        };
+
+        const data = await Role.findOne(find)
+
+        res.render("admin/pages/role/edit", {
+            pageTitle : "Tạo nhóm quyền",
+            data : data
+        });
+    }
+    catch{
+        res.redirect(`${systemConfig.prefixAdmin}/roles`);
+    }
+};
+
+// PATCH /admin/roles/edit/:id
+module.exports.editPatch = async(req, res)=>{
+    const id = req.params.id;
+    try{
+        await Role.updateOne({_id: id}, req.body);
+        
+        req.flash("success", "Cập nhật quyền thành công");
+    }catch{
+        req.flash("error", "Cập nhật thất bại");
+    }
+    res.redirect(`${systemConfig.prefixAdmin}/roles/edit/${id}`);
+};
+
