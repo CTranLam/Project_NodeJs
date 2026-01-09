@@ -164,10 +164,14 @@ module.exports.edit= async(req, res)=>{
 
         const product = await Product.findOne(find);
 
+        const categorys = await ProductCategory.find({
+            deleted: false
+        });
         // console.log(product)
         res.render("admin/pages/products/edit", {
             pageTitle : "Chỉnh sửa sản phẩm",
-            product : product
+            product : product,
+            categorys: categorys
         });
     }catch(error){
         console.log("lỗi")
