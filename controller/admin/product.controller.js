@@ -4,6 +4,8 @@ const systemConfig = require("../../config/system");
 const filterStatusHelper = require("../helpers/filterStatus.js");
 const searchHelper = require("../helpers/search.js");
 const paginationHelper = require("../helpers/pagination.js");
+const ProductCategory = require("../../models/product-category.model");
+
 // GET /admin/products
 module.exports.index= async(req, res)=>{
     // Bộ lọc trạng thái
@@ -112,8 +114,14 @@ module.exports.deleteItem= async(req, res)=>{
 
 // GET /admin/products/create
 module.exports.create= async(req, res)=>{
+    let find = {
+        deleted: false
+    }
+    const categorys = await ProductCategory.find(find);
+
     res.render("admin/pages/products/create", {
-        pageTitle : "Thêm sản phẩm mới"
+        pageTitle : "Thêm sản phẩm mới",
+        categorys : categorys
     });
 }
 

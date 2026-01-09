@@ -21,6 +21,18 @@ block main
         name="title"
         required
       )
+
+    div(class="form-group")
+      label(for="product_category_id") Danh mục cha
+      select(
+        name="product_category_id"
+        id="product_category_id"
+        class="product_category_id"
+      )
+        option(value="") -- Chọn danh mục cha --
+        if(categorys)
+          each item in categorys
+            option(value=item.id) #{item.title}
     
     div(class="form-group")
       label(for="desc") Mô tả
