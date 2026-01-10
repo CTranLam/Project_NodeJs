@@ -1,9 +1,9 @@
 const Product = require("../../models/product.model.js");
 
 const systemConfig = require("../../config/system");
-const filterStatusHelper = require("../helpers/filterStatus.js");
-const searchHelper = require("../helpers/search.js");
-const paginationHelper = require("../helpers/pagination.js");
+const filterStatusHelper = require("../../helpers/filterStatus.js");
+const searchHelper = require("../../helpers/search.js");
+const paginationHelper = require("../../helpers/pagination.js");
 const ProductCategory = require("../../models/product-category.model");
 
 // GET /admin/products
