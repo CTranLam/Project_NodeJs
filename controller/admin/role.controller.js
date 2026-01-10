@@ -67,3 +67,36 @@ module.exports.editPatch = async(req, res)=>{
     res.redirect(`${systemConfig.prefixAdmin}/roles/edit/${id}`);
 };
 
+// GET /admin/roles/permissions
+module.exports.permissions = async (req, res) => {
+    try {
+        let find = {
+            deleted: false
+        }
+
+        const records = await Role.find(find).lean(); // lean() giúp biến record trở thành 1 mảng Object js
+
+        res.render("admin/pages/role/permissions", {
+            pageTitle: "Phân quyền",
+            records: records
+        });
+    }
+    catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/roles/permissions`);
+    }
+};
+
+// [PATCH] /admin/roles/permissions
+module.exports.permissionsPatch = async (req, res) => {
+  // Dữ liệu nhận được là chuỗi JSON nên cần parse ra mảng
+  const permissions = JSON.parse(req.body.permissions);
+
+  for (const item of permissions) {
+    await Role.updateOne({ _id: item.id }, {
+      permissions: item.permissions 
+    });
+  }
+
+  req.flash("success", "Cập nhật phân quyền thành công!");
+  res.redirect(`${systemConfig.prefixAdmin}/roles/permissions`);
+};
