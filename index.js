@@ -22,9 +22,19 @@ app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 
 // Flash
-app.use(cookieParser('secret'));
-app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(cookieParser());
+
+app.use(session({
+  secret: 'keyboard cat', 
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60000
+  }
+}));
+
 app.use(flash());
+
 // End Flash
 
 app.set('views', `${__dirname}/views`); 

@@ -13,8 +13,8 @@ block main
       method="POST"
       enctype="multipart/form-data"
     )
-      div(class="form-group")
-        label(for="fullname") Họ tên *
+      div(class="mb-3")
+        label(for="fullname" class="form-label") Họ tên *
         input(
           type="text" 
           class="form-control" 
@@ -24,8 +24,8 @@ block main
           required
         )
       
-      div(class="form-group")
-        label(for="email") Email *
+      div(class="mb-3")
+        label(for="email" class="form-label") Email *
         input(
           type="email" 
           class="form-control" 
@@ -35,8 +35,8 @@ block main
           required
         )
       
-      div(class="form-group")
-        label(for="password") Mật khẩu
+      div(class="mb-3")
+        label(for="password" class="form-label") Mật khẩu
         input(
           type="password" 
           class="form-control" 
@@ -45,8 +45,8 @@ block main
           placeholder="Nhập mật khẩu mới nếu muốn thay đổi"
         )
 
-      div(class="form-group")
-        label(for="phone") Số điện thoại
+      div(class="mb-3")
+        label(for="phone" class="form-label") Số điện thoại
         input(
           type="text" 
           class="form-control" 
@@ -55,11 +55,11 @@ block main
           value=data.phone
         )
 
-      div(class="form-group" upload-image)
-        label(for="avatar") Ảnh
+      div(class="mb-3" upload-image)
+        label(for="avatar" class="form-label") Ảnh
         input(
           type="file"
-          class="form-control-file"
+          class="form-control"
           id="avatar"
           name="avatar"
           accept="image/*"
@@ -73,9 +73,9 @@ block main
           upload-image-preview
         )
 
-      div(class="form-group")
-        label(for="role_id") Nhóm quyền
-        select(name="role_id" id="role_id" class="form-control")
+      div(class="mb-3")
+        label(for="role_id" class="form-label") Nhóm quyền
+        select(name="role_id" id="role_id" class="form-select")
           option(disabled) -- Chọn --
           each item in roles
             option(
@@ -83,29 +83,30 @@ block main
               selected=(item.id == data.role_id ? true : false)
             ) #{item.title}
       
-      div(class="form-group form-check form-check-inline")
-        input(
-          type="radio"
-          class="form-check-input"
-          id="statusActive"
-          name="status"
-          value="active"
-          checked=(data.status === "active" ? true : false)
-        )
-        label(for="statusActive" class="form-check-label") Hoạt động
+      div(class="mb-3")
+        div(class="form-check form-check-inline")
+          input(
+            type="radio"
+            class="form-check-input"
+            id="statusActive"
+            name="status"
+            value="active"
+            checked=(data.status === "active" ? true : false)
+          )
+          label(for="statusActive" class="form-check-label") Hoạt động
 
-      div(class="form-group form-check form-check-inline")
-        input(
-          type="radio"
-          class="form-check-input"
-          id="statusInActive"
-          name="status"
-          value="inactive"
-          checked=(data.status === "inactive" ? true : false)
-        )
-        label(for="statusInActive" class="form-check-label") Dừng hoạt động
+        div(class="form-check form-check-inline")
+          input(
+            type="radio"
+            class="form-check-input"
+            id="statusInActive"
+            name="status"
+            value="inactive"
+            checked=(data.status === "inactive" ? true : false)
+          )
+          label(for="statusInActive" class="form-check-label") Dừng hoạt động
 
-      div(class="form-group")
+      div(class="mb-3")
         button(type="submit" class="btn btn-primary") Cập nhật
   else
-    p Vui lòng tạo nhóm quyền trước khi cập nhật tài khoản.
+    p(class="alert alert-warning") Vui lòng tạo nhóm quyền trước khi cập nhật tài khoản.
