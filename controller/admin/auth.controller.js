@@ -3,9 +3,15 @@ const md5 = require("md5")
 const systemConfig = require("../../config/system");
 // [GET] /admin/auth/login
 module.exports.login= (req, res) => {
-  res.render("admin/pages/auth/login", {
-    pageTitle: "Trang đăng nhập"
-  });
+  // Đăng nhập có token rồi mà vẫn vào router login thì redirect lại về dashboard
+  if(req.cookies.token){
+    res.redirect(`${systemConfig.prefixAdmin}/dashboard`);
+    return;
+  }else{
+      res.render("admin/pages/auth/login", {
+        pageTitle: "Trang đăng nhập"
+      });
+  }
 }
 
 // [POST] /admin/auth/login
